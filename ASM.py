@@ -103,7 +103,7 @@ class ASM:
 					out += ('1 1000 %s %s' % (decToBin(word.split()[1], 7), \
                                                  decToBin(word.split()[2], 127)))
 				elif word.startswith('Bshift '):
-					out += ('1 1001 %s %s %s' % (decToBin(word.split()[1], 7), \
+					out += ('1 1001 %s %s 000%s' % (decToBin(word.split()[1], 3), \
                                                  decToBin(word.split()[2], 15), decToBin(word.split()[3], 15)))
 				elif word.startswith('Compare '):
 					out += ('1 1010 %s %s 00%s' % (decToBin(word.split()[1], 7), \
