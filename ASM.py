@@ -10,6 +10,8 @@ class LargeNumber(Exception):
 class FewArgs(Exception):
 	pass
 
+import traceback
+
 class ASM:
 	def __init__(self, code):
 		self.data = code
@@ -19,8 +21,8 @@ class ASM:
 			raise LargeNumber()
 
 		val = int(dec)
-		out = '{%s:b}' % str(dec)
-		out = out.format(10)
+		out = bin(int(dec))
+		out = out.replace('b', '')
 
 		while (2**(len(out)))-1 < max:
 			out = ('0') + out
@@ -36,20 +38,20 @@ class ASM:
 		out = ''
 
 		decToBin = self.decToBin
-	
-		try:
+
+		try:	
 			for word in cmds:
 				if word.startswith('NoOp '):
 					out += ('0 0000 000 000 00000')
 				elif word.startswith('Load '):
-					out += ('0 0001 000 000 00000\n%s' % decToBin(word.split()[1], 131071))
+					out += ('0 0001 000 000 00000\n%s' % (decToBin(word.split()[1], 131071)))
 				elif word.startswith('Store '):
-					out += ('0 0010 000 000 00000\n%s' % decToBin(word.split()[1], 131071))
+					out += ('0 0010 000 000 00000\n%s' % (decToBin(word.split()[1], 131071)))
 				elif word.startswith('CopyReg '):
 					out += ('0 0011 %s %s 00000' % (decToBin(word.split()[1], 7), \
-                                                 decToBin(word.split()[2], 7)))
+                       	                         decToBin(word.split()[2], 7)))
 				elif word.startswith('Interrupt '):
-					out += ('0 0100 %s 000 00000' % decToBin(word.split()[1], 7))
+					out += ('0 0100 %s 000 00000' % (decToBin(word.split()[1], 7)))
 				elif word.startswith('Pointer '):
 					out += ('0 0101 %s %s 0000%s' % (decToBin(word.split()[1], 7), \
                                                  decToBin(word.split()[2], 7), decToBin(word.split()[3], 1)))
@@ -95,7 +97,7 @@ class ASM:
 					out += ('1 0111 %s %s %s' % (decToBin(word.split()[1], 7), \
                                                  decToBin(word.split()[2], 7), decToBin(word.split()[3], 31)))
 				elif word.startswith('AND '):
-                                        out += ('1 1000 %s %s %s' % (decToBin(word.split()[1], 7), \
+					out += ('1 1000 %s %s %s' % (decToBin(word.split()[1], 7), \
                                                  decToBin(word.split()[2], 7), decToBin(word.split()[3], 31)))
 				elif word.startswith('ShiftDown '):
 					out += ('1 1001 %s %s' % (decToBin(word.split()[1], 7), \
@@ -112,9 +114,6 @@ class ASM:
 					out += ('1 1111 000 000 00000')
 
 				out += '\n'
-
-		except IndexError as E:
-			print(str(E))
+		except IOError:
 			raise FewArgs()
-
 		return out

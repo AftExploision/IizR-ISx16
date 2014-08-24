@@ -1,4 +1,4 @@
 CopyReg 1 2
 CopyReg 3 4
-Add 1 2 0
+Add 1 3 0
 Store 1 0
