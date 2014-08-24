@@ -23,6 +23,7 @@ except FewArgs:
 except LargeNumber:
 	print('Number too large!')
 
+out = out.rstrip('\n')
 file = open(sys.argv[2], 'w')
 file.write(out)
 file.close()
