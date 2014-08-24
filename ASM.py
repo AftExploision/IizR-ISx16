@@ -87,29 +87,26 @@ class ASM:
 				elif word.startswith('Sub '):
 					out += ('1 0011 %s %s %s' % (decToBin(word.split()[1], 7), \
                                                  decToBin(word.split()[2], 7), decToBin(word.split()[3], 31)))
-				elif word.startswith('CondSub '):
+				elif word.startswith('SubShift '):
 					out += ('1 0100 %s %s %s' % (decToBin(word.split()[1], 7), \
                                                  decToBin(word.split()[2], 7), decToBin(word.split()[3], 31)))
-				elif word.startswith('SubShift '):
+				elif word.startswith('OR '):
 					out += ('1 0101 %s %s %s' % (decToBin(word.split()[1], 7), \
                                                  decToBin(word.split()[2], 7), decToBin(word.split()[3], 31)))
-				elif word.startswith('OR '):
+				elif word.startswith('XOR '):
 					out += ('1 0110 %s %s %s' % (decToBin(word.split()[1], 7), \
                                                  decToBin(word.split()[2], 7), decToBin(word.split()[3], 31)))
-				elif word.startswith('XOR '):
+				elif word.startswith('AND '):
 					out += ('1 0111 %s %s %s' % (decToBin(word.split()[1], 7), \
                                                  decToBin(word.split()[2], 7), decToBin(word.split()[3], 31)))
-				elif word.startswith('AND '):
-					out += ('1 1000 %s %s %s' % (decToBin(word.split()[1], 7), \
-                                                 decToBin(word.split()[2], 7), decToBin(word.split()[3], 31)))
 				elif word.startswith('ShiftDown '):
-					out += ('1 1001 %s %s' % (decToBin(word.split()[1], 7), \
+					out += ('1 1000 %s %s' % (decToBin(word.split()[1], 7), \
                                                  decToBin(word.split()[2], 127)))
 				elif word.startswith('Bshift '):
-					out += ('1 1010 %s %s %s' % (decToBin(word.split()[1], 7), \
+					out += ('1 1001 %s %s %s' % (decToBin(word.split()[1], 7), \
                                                  decToBin(word.split()[2], 15), decToBin(word.split()[3], 15)))
 				elif word.startswith('Compare '):
-					out += ('1 1011 %s %s 00%s' % (decToBin(word.split()[1], 7), \
+					out += ('1 1010 %s %s 00%s' % (decToBin(word.split()[1], 7), \
                                                  decToBin(word.split()[2], 7), decToBin(word.split()[3], 7)))
 				elif word.startswith('VOID '):
 					out += ('1 1110 000 000 00000')
