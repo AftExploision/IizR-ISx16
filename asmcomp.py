@@ -2,10 +2,14 @@ import sys
 from ASM import InvalidSyntax, InvalidNumber, FewArgs, LargeNumber, ASM
 
 if len(sys.argv) < 3:
-	print('Not enough arguements!')
+	inf = input('Path to input file. ')
+	outf = input('Path to output file. ')
 	exit()
+else:
+	inf = sys.argv[1]
+	outf = sys.argv[2]
 
-file = open(sys.argv[1], 'r')
+file = open(inf, 'r')
 code = file.read()
 file.close()
 
@@ -24,6 +28,6 @@ except LargeNumber:
 	print('Number too large!')
 
 out = out.rstrip('\n')
-file = open(sys.argv[2], 'w')
+file = open(outf, 'w')
 file.write(out)
 file.close()
