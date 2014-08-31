@@ -1,13 +1,16 @@
 import sys
 
 if len(sys.argv) < 3:
-	print('Not enough args!')
-	exit()
+	inf = input('Input input file path. ')
+	outf = input('Enter output file path. ')
+else:
+	inf = sys.argv[1]
+	outf = sys.argv[2]
 
 binToHex = {'0000':'0', '0001':'1', '0010':'2', '0011':'3', '0100':'4', '0101':'5', '0110':'6', '0111':'7', \
             '1000':'8', '1001':'9', '1010':'A', '1011':'B', '1100':'C', '1101':'D', '1110':'E', '1111':'F'}
 
-file = open(sys.argv[1], 'r')
+file = open(inf, 'r')
 bin = file.read()
 file.close()
 
@@ -21,6 +24,6 @@ for f in bins:
 
 out = out.rstrip('\n')
 
-file = open(sys.argv[2], 'w')
+file = open(outf, 'w')
 file.write(out)
 file.close()

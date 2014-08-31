@@ -54,7 +54,8 @@ class ASM:
 					out += ('0 0011 %s %s 00000' % (decToBin(word.split()[1], 7), \
                        	                         decToBin(word.split()[2], 7)))
 				elif word.startswith('Interrupt '):
-					out += ('0 0100 %s 000 00000' % (decToBin(word.split()[1], 7)))
+					out += ('0 0100 %s %s %s' % (decToBin(word.split()[1], 7), \
+                                                 decToBin(word.split()[2], 7), word.split()[3], 31))
 				elif word.startswith('Pointer '):
 					out += ('0 0101 %s %s 0000%s' % (decToBin(word.split()[1], 7), \
                                                  decToBin(word.split()[2], 7), decToBin(word.split()[3], 1)))
@@ -67,9 +68,8 @@ class ASM:
 				elif word.startswith('PC '):
 					out += ('0 1000 %s %s %s' % (decToBin(word.split()[1], 7), \
                                                  decToBin(word.split()[2], 7), decToBin(word.split()[3], 31)))
-				elif word.startswith('ScratchPad '):
-					out += ('0 1001 %s %s %s' % (decToBin(word.split()[0], 7), \
-                                                 decToBin(word.split()[1], 7), decToBin(word.split()[2], 31)))
+				elif word.startswith('MVOID '):
+					out += ('0 1001 000 000 00000')
 				elif word.startswith('Branch '):
 					out += ('0 1111 %s %s %s\n%s' % (decToBin(word.split()[1], 7), \
                                                  decToBin(word.split()[2], 7), decToBin(word.split()[3], 31), \
@@ -103,11 +103,11 @@ class ASM:
 					out += ('1 1000 %s %s' % (decToBin(word.split()[1], 7), \
                                                  decToBin(word.split()[2], 127)))
 				elif word.startswith('Bshift '):
-					out += ('1 1001 %s %s 000%s' % (decToBin(word.split()[1], 3), \
-                                                 decToBin(word.split()[2], 15), decToBin(word.split()[3], 15)))
+					out += ('1 1001 %s %s 00%s' % (decToBin(word.split()[1], 3), \
+                                                 decToBin(word.split()[2], 31), decToBin(word.split()[3], 15)))
 				elif word.startswith('Compare '):
-					out += ('1 1010 %s %s 00%s' % (decToBin(word.split()[1], 7), \
-                                                 decToBin(word.split()[2], 7), decToBin(word.split()[3], 7)))
+					out += ('1 1010 %s %s %s' % (decToBin(word.split()[1], 7), \
+                                                 decToBin(word.split()[2], 7), decToBin(word.split()[3], 31)))
 				elif word.startswith('VOID '):
 					out += ('1 1110 000 000 00000')
 				elif word.startswith('SysHault '):
